@@ -5,5 +5,5 @@ h2
 h3 Protocols
 - version.protocols.each do |protocol|
   p
-    a href="./#{version.version}/#{protocol.name}"
+    a href=to("#{version.version}/#{protocol.name}")
       = protocol.name

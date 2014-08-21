@@ -2,6 +2,6 @@ h2 Versions
 
 - service.all.each do |version|
   p
-    a href=version.version
+    a href=to("#{version.version}")
       | Version
       =< version.version
