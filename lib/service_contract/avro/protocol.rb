@@ -11,6 +11,16 @@ module ServiceContract
         end
       end
 
+      def types
+        avro.types.map do |type|
+          Type.new(type)
+        end
+      end
+
+      def path
+        File.join(service.path, name.pluralize)
+      end
+
       protected
 
       def avro

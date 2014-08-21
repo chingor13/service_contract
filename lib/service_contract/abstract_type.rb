@@ -1,5 +1,5 @@
 module ServiceContract
-  AbstractParameter = Struct.new(:definition) do
+  AbstractType = Struct.new(:definition) do
     def name
       raise :not_implemented
     end
@@ -8,8 +8,8 @@ module ServiceContract
       raise :not_implemented
     end
 
-    def doc
-      nil
+    def fields
+      []
     end
   end
 end

@@ -1,0 +1,17 @@
+doctype html
+html
+  head
+    title 
+      => service.name
+      | Documentation
+    link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"
+    script src="//code.jquery.com/jquery-2.1.1.min.js"
+    script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"
+    meta name="viewport" content="width=device-width, initial-scale=1"
+
+  body
+    .container
+      h1 = service.title
+      p = service.description
+
+      == yield

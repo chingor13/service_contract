@@ -1,0 +1,51 @@
+h2
+  | Version
+  =< version.version
+
+.row
+  .col-md-8
+    h2 Endpoints
+
+    .panel-group#endpoints
+      - protocol.endpoints.each do |endpoint|
+        .panel.panel-default
+          .panel-heading
+            h4.panel-title
+              a data-toggle="collapse" href="#collapse#{endpoint.name}"
+                = endpoint.description
+          .panel-collapse.collapse.in id="collapse#{endpoint.name}"
+            .panel-body
+              p = endpoint.doc
+
+              h4 Parameters
+
+              ul
+                - endpoint.parameters.each do |parameter|
+                  li
+                    => parameter.type
+                    = parameter.name
+
+              h4 Response
+              p 
+                = endpoint.response_description
+
+  .col-md-4
+    h2 Types
+
+    .panel-group#types
+      - protocol.types.each do |type|
+        .panel.panel-default
+          .panel-heading
+            h4.panel-title
+              a data-toggle="collapse" href="#collapse#{type.name}"
+                = type.name
+          .panel-collapse.collapse.in id="collapse#{type.name}"
+            .panel-body
+              ul
+                - type.fields.each do |field|
+                  li
+                    => field.type
+                    | - 
+                    => field.name
+                    - if field.doc
+                      | (#{field.doc})

@@ -13,6 +13,15 @@ module ServiceContract
         def data_dir
           raise :not_implemented
         end
+
+        def title
+          "Avro Service"
+        end
+
+        def description
+          ""
+        end
+
       end
 
       def protocols
@@ -22,6 +31,10 @@ module ServiceContract
             Protocol.new(name, self)
           end
         end
+      end
+
+      def path
+        "/#{version}"
       end
 
       def data_dir

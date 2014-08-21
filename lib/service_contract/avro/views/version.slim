@@ -1,0 +1,9 @@
+h2 
+  | Version
+  =< version.version
+
+h3 Protocols
+- version.protocols.each do |protocol|
+  p
+    a href="./#{version.version}/#{protocol.name}"
+      = protocol.name

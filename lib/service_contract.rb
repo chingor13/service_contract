@@ -5,6 +5,7 @@ module ServiceContract
   autoload :AbstractParameter, 'service_contract/abstract_parameter'
   autoload :AbstractProtocol, 'service_contract/abstract_protocol'
   autoload :AbstractService, 'service_contract/abstract_service'
+  autoload :AbstractType, 'service_contract/abstract_type'
 
   # providers
   autoload :Avro, 'service_contract/avro'

@@ -10,6 +10,10 @@ module ServiceContract
           definition.type.name :
           definition.type.type_sym.to_s
       end
+
+      def doc
+        definition.doc
+      end
     end
   end
 end
