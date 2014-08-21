@@ -1,0 +1,60 @@
+{
+  "protocol" : "SalesRegion",
+  "namespace" : "Gnomon",
+  "types" : [ {
+    "type" : "record",
+    "name" : "SalesRegion",
+    "fields" : [ {
+      "name" : "id",
+      "type" : "int"
+    }, {
+      "name" : "name",
+      "type" : "string"
+    }, {
+      "name" : "state_id",
+      "type" : "int"
+    }, {
+      "name" : "split_region",
+      "type" : "boolean"
+    } ]
+  }, {
+    "type" : "record",
+    "name" : "SalesRegionFetchOption",
+    "fields" : [ {
+      "name" : "page",
+      "type" : "int",
+      "default" : 1
+    }, {
+      "name" : "per_page",
+      "type" : "int",
+      "default" : 30
+    }, {
+      "name" : "state_id",
+      "type" : "int"
+    } ]
+  } ],
+  "messages" : {
+    "index" : {
+      "doc" : "Returns a list of SalesRegion",
+      "request" : [ {
+        "name" : "options",
+        "type" : "SalesRegionFetchOption"
+      } ],
+      "response" : {
+        "type" : "array",
+        "items" : "SalesRegion"
+      }
+    },
+    "show" : {
+      "doc" : "Return a single SalesRegion",
+      "request" : [ {
+        "name" : "id",
+        "type" : "int"
+      } ],
+      "response" : {
+        "type" : "array",
+        "items" : "SalesRegion"
+      }
+    }
+  }
+}

@@ -1,0 +1,24 @@
+@namespace("Gnomon")
+
+protocol SalesRegion {
+
+  record SalesRegion {
+    int id;
+    string name;
+    int state_id;
+    boolean split_region;
+  }
+
+  record SalesRegionFetchOption {
+    int page = 1;
+    int per_page = 30;
+    int state_id;
+  }
+
+  /** Returns a list of SalesRegion */
+  array<SalesRegion> index(SalesRegionFetchOption options);
+
+  /** Return a single SalesRegion */
+  array<SalesRegion> show(int id);
+
+}

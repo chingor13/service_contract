@@ -1,0 +1,113 @@
+{
+  "protocol" : "Location",
+  "namespace" : "Gnomon",
+  "types" : [ {
+    "type" : "record",
+    "name" : "Timestamp",
+    "fields" : [ {
+      "name" : "timestamp",
+      "type" : "int"
+    } ]
+  }, {
+    "type" : "record",
+    "name" : "Location",
+    "doc" : "This main class for this protocol",
+    "fields" : [ {
+      "name" : "id",
+      "type" : "int",
+      "doc" : "foo"
+    }, {
+      "name" : "type",
+      "type" : "string"
+    }, {
+      "name" : "county_name",
+      "type" : "string"
+    }, {
+      "name" : "state_name",
+      "type" : "string"
+    }, {
+      "name" : "country_name",
+      "type" : "string"
+    }, {
+      "name" : "city_name",
+      "type" : "string"
+    }, {
+      "name" : "neighborhood_name",
+      "type" : "string"
+    }, {
+      "name" : "postal_code_name",
+      "type" : "string"
+    }, {
+      "name" : "to_location",
+      "type" : "string"
+    }, {
+      "name" : "to_short_location",
+      "type" : "string"
+    }, {
+      "name" : "to_long_location",
+      "type" : "string"
+    }, {
+      "name" : "to_location_with_region",
+      "type" : "string"
+    }, {
+      "name" : "latitude",
+      "type" : "float"
+    }, {
+      "name" : "longitude",
+      "type" : "float"
+    }, {
+      "name" : "population",
+      "type" : "int"
+    }, {
+      "name" : "updated_at",
+      "type" : "Timestamp"
+    } ]
+  }, {
+    "type" : "record",
+    "name" : "FetchOption",
+    "fields" : [ {
+      "name" : "page",
+      "type" : "int",
+      "default" : 0
+    }, {
+      "name" : "per_page",
+      "type" : "int",
+      "default" : 30
+    } ]
+  } ],
+  "messages" : {
+    "index" : {
+      "doc" : "Returns a list of Locations",
+      "request" : [ {
+        "name" : "options",
+        "type" : "FetchOption"
+      } ],
+      "response" : {
+        "type" : "array",
+        "items" : "Location"
+      }
+    },
+    "show" : {
+      "doc" : "Return a single Location",
+      "request" : [ {
+        "name" : "id",
+        "type" : "int"
+      } ],
+      "response" : {
+        "type" : "array",
+        "items" : "Location"
+      }
+    },
+    "resolve" : {
+      "doc" : "Try to guess a location from a given string",
+      "request" : [ {
+        "name" : "q",
+        "type" : "string"
+      } ],
+      "response" : {
+        "type" : "array",
+        "items" : "Location"
+      }
+    }
+  }
+}

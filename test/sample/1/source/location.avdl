@@ -1,0 +1,43 @@
+@namespace("Gnomon")
+
+protocol Location {
+
+  record Timestamp {
+    int timestamp;
+  }
+
+  /** This main class for this protocol */
+  record Location {
+    /** foo */
+    int id;
+    string type;
+    string county_name;
+    string state_name;
+    string country_name;
+    string city_name;
+    string neighborhood_name;
+    string postal_code_name;
+    string to_location;
+    string to_short_location;
+    string to_long_location;
+    string to_location_with_region;
+    float latitude;
+    float longitude;
+    int population;
+    Timestamp updated_at;
+  }
+
+  record FetchOption {
+    int page = 0;
+    int per_page = 30;
+  }
+
+  /** Returns a list of Locations */
+  array<Location> index(FetchOption options);
+
+  /** Return a single Location */
+  array<Location> show(int id);
+
+  /** Try to guess a location from a given string */
+  array<Location> resolve(string q);
+}
