@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = ServiceContract::VERSION
   spec.authors       = ["Jeff Ching"]
   spec.email         = ["jching@avvo.com"]
-  spec.summary       = %q{TODO: Write a short summary. Required.}
-  spec.description   = %q{TODO: Write a longer description. Optional.}
+  spec.summary       = %q{Abstract the definition of a service's interface contract}
+  spec.description   = %q{Abstract the definition of a service's interface contract. Supports Avro}
   spec.homepage      = ""
   spec.license       = "MIT"
 
