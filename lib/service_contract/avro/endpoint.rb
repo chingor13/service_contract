@@ -4,10 +4,14 @@ module ServiceContract
   module Avro
     class Endpoint < AbstractEndpoint
       extend Forwardable
-      def_delegators :definition, :doc, :name, :response, :request
+      def_delegators :definition, :name, :response, :request
 
       def description
         [request_method, path].join(" ")
+      end
+
+      def doc
+        definition.respond_to?(:doc) ? definition.doc : nil
       end
 
       def response_description(data = response)

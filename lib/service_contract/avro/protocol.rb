@@ -18,10 +18,14 @@ module ServiceContract
       end
 
       def path
-        File.join(service.path, name.pluralize)
+        File.join(service.path, resource_name)
       end
 
       protected
+
+      def resource_name
+        name.respond_to?(:pluralize) ? name.pluralize : "#{name}s"
+      end
 
       def avro
         @avro ||= begin

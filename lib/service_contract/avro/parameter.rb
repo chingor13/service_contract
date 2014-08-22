@@ -12,7 +12,7 @@ module ServiceContract
       end
 
       def doc
-        definition.doc
+        definition.respond_to?(:doc) ? definition.doc : nil
       end
     end
   end

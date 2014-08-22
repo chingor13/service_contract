@@ -1,4 +1,5 @@
 require 'sinatra/base'
+require 'slim'
 
 module ServiceContract
   module Avro
