@@ -16,25 +16,28 @@ module ServiceContract
           assert data.has_key?(field.name), "expected #{type.name} to have attribute: #{field.name}"
           value = data.fetch(field.name)
 
-          expected_class = class_for_parameter(field)
-          assert (allow_nil && value.nil?) || value.is_a?(expected_class), "expected #{type.name}.#{field.name} to be a #{expected_class}"
+          expected_classes = classes_for_parameter(field)
+          assert (allow_nil && value.nil?) || expected_classes.any?{|klass| value.is_a?(klass)}, "expected #{type.name}.#{field.name} to be a #{expected_classes.join(", ")}"
         end
       end
     end
 
     protected
 
-    def class_for_parameter(field)
-      case field.type
+    def classes_for_parameter(field)
+      classes = case field.type
       when "int"
         Fixnum
       when "string"
         String
       when "float"
         Float
+      when "boolean"
+        [TrueClass, FalseClass]
       else # a complex type
         Hash
       end
+      Array(classes)
     end
 
   end
