@@ -12,7 +12,12 @@ module ServiceContract
 
       get '/:version' do
         version = service.find(params[:version])
-        slim :version, locals: { version: version }
+
+        if version
+          slim :version, locals: { version: version }
+        else
+          status 404
+        end
       end
 
       get '/' do
