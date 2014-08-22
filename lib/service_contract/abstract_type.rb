@@ -4,8 +4,8 @@ module ServiceContract
       raise :not_implemented
     end
 
-    def type
-      raise :not_implemented
+    def subtype
+      nil
     end
 
     def fields

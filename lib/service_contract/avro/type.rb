@@ -5,18 +5,20 @@ module ServiceContract
         definition.name
       end
 
-      def type
-        if record?
-          definition.type.name
-        else
-          definition.type.type_sym.to_s
-        end
-      end
-
       def fields
         definition.fields.map do |field|
           Parameter.new(field)
         end
+      end
+
+      def to_s
+        name
+      end
+
+      def self.build(definition)
+        definition.is_a?(::Avro::Schema::ArraySchema) ? 
+          ArrayType.new(definition) :
+          Type.new(definition)
       end
 
       protected

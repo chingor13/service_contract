@@ -3,5 +3,9 @@ module ServiceContract
     def parameters
       []
     end
+
+    def response_type
+      nil
+    end
   end
 end

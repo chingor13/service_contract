@@ -2,6 +2,7 @@ require 'avro'
 
 module ServiceContract
   module Avro
+    autoload :ArrayType, 'service_contract/avro/array_type'
     autoload :Documentation, 'service_contract/avro/documentation'
     autoload :Endpoint, 'service_contract/avro/endpoint'
     autoload :Errors, 'service_contract/avro/errors'

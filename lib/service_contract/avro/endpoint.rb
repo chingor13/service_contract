@@ -14,15 +14,8 @@ module ServiceContract
         definition.respond_to?(:doc) ? definition.doc : nil
       end
 
-      def response_description(data = response)
-        case data
-        when ::Avro::Schema::ArraySchema
-          "Array(#{response_description(data.items)})"
-        when ::Avro::Schema::RecordSchema
-          data.name
-        else
-          data.type_sym
-        end
+      def response_type
+        Type.build(response)
       end
 
       def parameters
