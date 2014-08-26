@@ -41,11 +41,13 @@ h2
                 = type.name
           .panel-collapse.collapse.in id="collapse#{type.name}"
             .panel-body
-              ul
-                - type.fields.each do |field|
-                  li
-                    => field.type
-                    | - 
-                    => field.name
-                    - if field.doc
-                      | (#{field.doc})
+              - type.fields.each do |field|
+                p
+                  a.pull-right data-toggle="collapse" href="#collapseDescription#{field.name}"
+                    i.glyphicon.glyphicon-info-sign
+                  => field.type
+                  | -
+                  =< field.name
+                - if field.doc
+                  p.collapse id="collapseDescription#{field.name}"
+                    em = field.doc
