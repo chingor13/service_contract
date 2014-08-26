@@ -8,6 +8,10 @@ module ServiceContract
       raise :not_implemented
     end
 
+    def default
+      nil
+    end
+
     def doc
       nil
     end

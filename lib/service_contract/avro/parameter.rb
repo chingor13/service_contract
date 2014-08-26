@@ -11,6 +11,10 @@ module ServiceContract
           definition.type.type_sym.to_s
       end
 
+      def default
+        definition.default
+      end
+
       def doc
         definition.respond_to?(:doc) ? definition.doc : nil
       end
