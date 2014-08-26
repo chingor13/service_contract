@@ -1,6 +1,9 @@
 h2
   | Version
-  =< version.version
+  =<> version.version
+a href=to(version.version)
+  i.glyphicon.glyphicon-chevron-left>
+  | Back
 
 .row
   .col-md-8
@@ -43,11 +46,11 @@ h2
             .panel-body
               - type.fields.each do |field|
                 p
-                  a.pull-right data-toggle="collapse" href="#collapseDescription#{field.name}"
+                  a.pull-right data-toggle="collapse" href="#collapseDescription#{type.name}#{field.name}"
                     i.glyphicon.glyphicon-info-sign
                   => field.type
                   | -
                   =< field.name
                 - if field.doc
-                  p.collapse id="collapseDescription#{field.name}"
+                  p.collapse id="collapseDescription#{type.name}#{field.name}"
                     em = field.doc
