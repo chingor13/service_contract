@@ -1,4 +1,4 @@
-# ServiceContract
+# ServiceContract [![Build Status](https://travis-ci.org/chingor13/service_contract.png)](https://travis-ci.org/chingor13/service_contract) [![Code Climate](https://codeclimate.com/github/chingor13/service_contract.png)](https://codeclimate.com/github/chingor13/service_contract) [![Code Coverage](https://codeclimate.com/github/chingor13/service_contract/coverage.png)](https://codeclimate.com/github/chingor13/service_contract)
 
 The gem tries to abstract the definition of a service's interface contract
 

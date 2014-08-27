@@ -1,3 +1,4 @@
+require 'codeclimate-test-reporter'
 require 'minitest/autorun'
 require 'service_contract'
 

@@ -1,0 +1,3 @@
+env:
+  global:
+    - CODECLIMATE_REPO_TOKEN=2ca11363f82515a172ab992c3e4bacf032fc088c57a9907bcb2bcb9eaa71e344 
