@@ -39,11 +39,9 @@ module ServiceContract
 
       def path
         case name
-        when "index"
+        when "index", "create"
           protocol.path
-        when "create"
-        when "destroy"
-        when "show"
+        when "show", "destroy", "update"
           File.join(protocol.path, ":id")
         else
           if member?
