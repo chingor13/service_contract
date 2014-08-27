@@ -51,3 +51,31 @@ protocol = version.protocol("location")
 protocol.endpoints
 => [<#ServiceContract::Avro::Endpoint>,...]
 ```
+
+## Documentation
+
+`service_contract` also provides a nice documentation layer packaged in the form of a [sinatra](http://www.sinatrarb.com/) rack application. 
+
+```
+module Gnomon
+  module Contract
+    class Documentation < ServiceContract::Avro::Documentation
+      helpers do
+        def service
+          Gnomon::Contract::Service
+        end
+      end
+    end
+  end
+end
+
+# in your rackup config
+run Gnomon::Contract::Documentation
+
+# or mount in rails routes
+MyApplication.routes.draw do
+  mount Gnomon::Contract::Documentation, at: "docs/"
+end
+```
+
+**Note**: You will have to add `sinatra` and `slim` (templating engine) to your gem dependencies yourself because it's not a core dependency.
