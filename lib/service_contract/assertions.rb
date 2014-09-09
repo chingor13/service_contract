@@ -18,6 +18,12 @@ module ServiceContract
 
           expected_classes = classes_for_parameter(field)
           assert (allow_nil && value.nil?) || expected_classes.any?{|klass| value.is_a?(klass)}, "expected #{type.name}.#{field.name} to be a #{expected_classes.join(", ")}"
+
+          if field.type == "array"
+            value.each do |val|
+              assert_data_matches_type(val, field.subtype)
+            end
+          end
         end
       end
     end
@@ -25,7 +31,11 @@ module ServiceContract
     protected
 
     def classes_for_parameter(field)
-      classes = case field.type
+      type = field.type
+      type = type.type_sym.to_s if type.respond_to?(:type_sym)
+      classes = case type
+      when "array"
+        Array
       when "int"
         Fixnum
       when "string"
