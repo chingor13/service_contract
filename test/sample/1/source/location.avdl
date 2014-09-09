@@ -17,13 +17,10 @@ protocol Location {
     string city_name;
     string neighborhood_name;
     string postal_code_name;
-    string to_location;
-    string to_short_location;
-    string to_long_location;
-    string to_location_with_region;
     float latitude;
     float longitude;
     int population;
+    array<Timestamp> foo;
     Timestamp updated_at;
   }
 

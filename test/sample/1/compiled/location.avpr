@@ -38,18 +38,6 @@
       "name" : "postal_code_name",
       "type" : "string"
     }, {
-      "name" : "to_location",
-      "type" : "string"
-    }, {
-      "name" : "to_short_location",
-      "type" : "string"
-    }, {
-      "name" : "to_long_location",
-      "type" : "string"
-    }, {
-      "name" : "to_location_with_region",
-      "type" : "string"
-    }, {
       "name" : "latitude",
       "type" : "float"
     }, {
@@ -58,6 +46,12 @@
     }, {
       "name" : "population",
       "type" : "int"
+    }, {
+      "name" : "foo",
+      "type" : {
+        "type" : "array",
+        "items" : "Timestamp"
+      }
     }, {
       "name" : "updated_at",
       "type" : "Timestamp"

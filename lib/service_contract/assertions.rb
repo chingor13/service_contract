@@ -13,8 +13,11 @@ module ServiceContract
         end
       else
         type.fields.each do |field|
-          assert data.has_key?(field.name), "expected #{type.name} to have attribute: #{field.name}"
-          value = data.fetch(field.name)
+          value = data.fetch(field.name) do
+            data.fetch(field.name.to_sym) do
+              assert false, "expected #{type.name} to have attribute: #{field.name}"
+            end
+          end
 
           expected_classes = classes_for_parameter(field)
           assert (allow_nil && value.nil?) || expected_classes.any?{|klass| value.is_a?(klass)}, "expected #{type.name}.#{field.name} to be a #{expected_classes.join(", ")}"

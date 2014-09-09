@@ -9,5 +9,6 @@ Rake::TestTask.new(:test) do |t|
   t.verbose = false
 end
 
+require 'service_contract/tasks'
 
 task default: :test
