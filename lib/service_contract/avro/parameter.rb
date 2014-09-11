@@ -10,7 +10,7 @@ module ServiceContract
       end
 
       def subtype
-        definition.type.is_a?(::Avro::Schema::ArraySchema) ?
+        definition.array? ?
           definition.type.items :
           nil
       end
