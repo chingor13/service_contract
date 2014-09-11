@@ -53,6 +53,12 @@
         "items" : "Timestamp"
       }
     }, {
+      "name" : "numbers",
+      "type" : {
+        "type" : "array",
+        "items" : "int"
+      }
+    }, {
       "name" : "updated_at",
       "type" : "Timestamp"
     } ]

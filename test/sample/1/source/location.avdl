@@ -21,6 +21,7 @@ protocol Location {
     float longitude;
     int population;
     array<Timestamp> foo;
+    array<int> numbers;
     Timestamp updated_at;
   }
 

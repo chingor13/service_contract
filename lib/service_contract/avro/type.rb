@@ -2,7 +2,7 @@ module ServiceContract
   module Avro
     class Type < AbstractType
       def name
-        definition.name
+        definition.to_s
       end
 
       def fields
@@ -15,17 +15,48 @@ module ServiceContract
         name
       end
 
+      def subtype
+        return nil unless definition.respond_to?(:items)
+        Type.build(definition.items)
+      end
+
+      def array?
+        type_string == "array"
+      end
+
       def self.build(definition)
-        definition.is_a?(::Avro::Schema::ArraySchema) ? 
-          ArrayType.new(definition) :
-          Type.new(definition)
+        Type.new(definition)
+      end
+
+      def complex?
+        type_string == "record"
+      end
+
+      def valid_ruby_types
+        case type_string
+        when "array"
+          [Array]
+        when "int"
+          [Fixnum]
+        when "string"
+          [String]
+        when "float"
+          [Float]
+        when "boolean"
+          [TrueClass, FalseClass]
+        else # a complex type
+          [Hash]
+        end
       end
 
       protected
 
-      def record?
-        definition.type.type_sym == :record
+      def type_string
+        type = definition.type
+        type = type.type_sym.to_s if type.respond_to?(:type_sym)
+        type
       end
+
     end
   end
 end
