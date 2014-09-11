@@ -10,8 +10,6 @@ module ServiceContract
       end
 
       def subtype
-        puts "in subtype"
-        pp definition
         definition.type.is_a?(::Avro::Schema::ArraySchema) ?
           definition.type.items :
           nil
