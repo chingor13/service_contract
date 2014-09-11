@@ -2,7 +2,11 @@ module ServiceContract
   module Avro
     class Type < AbstractType
       def name
-        definition.to_s
+        array? ? 
+          "Array(#{subtype.name})" :
+          complex? ?
+            definition.name :
+            definition.type.to_s
       end
 
       def fields
