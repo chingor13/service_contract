@@ -29,6 +29,10 @@ class AssertionsTest < Minitest::Test
           timestamp: 1410278741
         }
       ],
+      numbers: [
+        1,
+        2
+      ],
       updated_at: {
         timestamp: 1410278741
       }

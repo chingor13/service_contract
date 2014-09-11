@@ -6,20 +6,13 @@ module ServiceContract
       end
 
       def type
-        definition.type.type_sym == :record ?
-          definition.type.name :
-          definition.type.type_sym.to_s
+        Type.build(definition.type)
       end
 
       def subtype
-        item = definition.type.is_a?(::Avro::Schema::ArraySchema) ?
-                definition.type.items :
-                nil
-        return nil unless item
-
-        item.is_a?(::Avro::Schema::PrimitiveSchema) ?
-          item.type_sym.to_s :
-          item
+        definition.array? ?
+          definition.type.items :
+          nil
       end
 
       def default
