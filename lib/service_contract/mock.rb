@@ -15,7 +15,7 @@ module ServiceContract
       private
 
       def type(version)
-        raise :not_implemented
+        raise "not_implemented"
       end
 
       # can set up custom generators by field name
