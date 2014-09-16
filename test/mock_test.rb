@@ -10,7 +10,7 @@ class MockTest < Minitest::Test
   include ServiceContract::Assertions
 
   def test_mocking
-    data = Array.new(5) { LocationMock.generate!(1) }
+    data = Array.new(2) { LocationMock.generate!(1) }
 
     service = SampleService.find(1)
     protocol = service.protocol("location")
