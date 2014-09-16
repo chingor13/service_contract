@@ -5,11 +5,7 @@ module ServiceContract
     class << self
       # generates fake data that adheres to the types defined in the service contract
       def generate!(version)
-        {}.tap do |res|
-          type(version).fields.each do |parameter|
-            res[parameter.name] = mock_value(parameter.type)
-          end
-        end
+        mock_fields(type(version))
       end
 
       private
@@ -24,20 +20,26 @@ module ServiceContract
         {}
       end
 
-      def mock_value(field)
-        return customizations[field.name].call if customizations.key?(field.name)
+      def mock_fields(type)
+        {}.tap do |res|
+          type.fields.each do |parameter|
+            if customizations.key?(parameter.name)
+              res[parameter.name] = customizations[parameter.name].call
+            else
+              res[parameter.name] = mock_value(parameter.type)
+            end
+          end
+        end
+      end
 
+      def mock_value(field)
         if field.array?
           Array.new(3) do
             mock_value(field.subtype)
           end
         elsif field.complex?
           # recursively mock values
-          {}.tap do |res|
-            field.fields.each do |parameter|
-              res[parameter.name] = mock_value(parameter.type)
-            end
-          end
+          mock_fields(field)
         else
           case field.name
           when "int", :int
