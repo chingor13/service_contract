@@ -9,6 +9,7 @@ module ServiceContract
 
   # test hooks
   autoload :Assertions, 'service_contract/assertions'
+  autoload :Mock, 'service_contract/mock'
 
   # providers
   autoload :Avro, 'service_contract/avro'
