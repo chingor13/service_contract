@@ -54,9 +54,8 @@ module ServiceContract
 
       # seems kinda hacky
       def member?
-        first_field_type = request.fields.first.type
-        first_field_type.complex? &&
-          first_field_type.name == protocol.main_type
+        first_param_type = parameters.first.type
+        first_param_type.complex? && first_param_type.name == protocol.main_type
       end
     end
   end
