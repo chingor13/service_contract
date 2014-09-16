@@ -7,7 +7,7 @@ module ServiceContract
 
     def assert_data_matches_type(data, type, allow_nil = true)
       if type.array?
-        assert data.is_a?(Array), "expected #{type.name} to be an Array"
+        assert data.is_a?(Array), "expected #{type.name} to be an Array; instead got: #{data.inspect} (#{data.class.name})"
         data.each do |datum|
           assert_data_matches_type(datum, type.subtype, allow_nil)
         end
@@ -28,7 +28,7 @@ module ServiceContract
         end
       else
         # type is a scalar
-        assert (allow_nil && data.nil?) || type.valid_ruby_types.any?{|klass| data.is_a?(klass)}, "foo"
+        assert (allow_nil && data.nil?) || type.valid_ruby_types.any?{|klass| data.is_a?(klass)}, "expected scalar type #{type.inspect} or nil; instead got: #{data.inspect} (#{data.class.name})"
       end
     end
 
