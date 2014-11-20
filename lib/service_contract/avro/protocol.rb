@@ -21,6 +21,11 @@ module ServiceContract
         File.join(service.path, resource_name)
       end
 
+      def main_type
+        # convert protocol name to a class like name.  i.e. "city_state" => "CityState"
+        name.split("_").map{|o| o.capitalize}.join
+      end
+
       protected
 
       def resource_name

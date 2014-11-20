@@ -1,0 +1,30 @@
+@namespace("Gnomon")
+
+protocol CityState {
+
+  record Timestamp {
+    int timestamp;
+  }
+
+  /** This main class for this protocol */
+  record CityState {
+    /** foo */
+    int id;
+    int city_id;
+    int state_id;
+  }
+
+  record FetchOption {
+    int page = 0;
+    int per_page = 30;
+  }
+
+  /** bogus method for testing no parameters */
+  void bogus();
+
+  /** method that uses non "main_type" as the first parameter is considered non-member */
+  array<CityState> non_member_method(FetchOption options);
+
+  /** method that uses "main_type" as the first parameter is considered member */
+  array<CityState> member_method(CityState params);
+}

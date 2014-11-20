@@ -54,6 +54,8 @@ module ServiceContract
 
       # seems kinda hacky
       def member?
+        return false if parameters.empty?
+
         first_param_type = parameters.first.type
         first_param_type.complex? && first_param_type.name == protocol.main_type
       end

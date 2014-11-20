@@ -8,7 +8,7 @@ class AssertionsTest < Minitest::Test
     assert service, "expect to find a service by version"
     assert_equal "1", service.version
 
-    assert_equal 2, service.protocols.length
+    assert_equal 3, service.protocols.length
     protocol = service.protocol("location")
     endpoint = protocol.endpoint("index")
 

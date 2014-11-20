@@ -1,0 +1,68 @@
+{
+  "protocol" : "CityState",
+  "namespace" : "Gnomon",
+  "types" : [ {
+    "type" : "record",
+    "name" : "Timestamp",
+    "fields" : [ {
+      "name" : "timestamp",
+      "type" : "int"
+    } ]
+  }, {
+    "type" : "record",
+    "name" : "CityState",
+    "doc" : "This main class for this protocol",
+    "fields" : [ {
+      "name" : "id",
+      "type" : "int",
+      "doc" : "foo"
+    }, {
+      "name" : "city_id",
+      "type" : "int"
+    }, {
+      "name" : "state_id",
+      "type" : "int"
+    } ]
+  }, {
+    "type" : "record",
+    "name" : "FetchOption",
+    "fields" : [ {
+      "name" : "page",
+      "type" : "int",
+      "default" : 0
+    }, {
+      "name" : "per_page",
+      "type" : "int",
+      "default" : 30
+    } ]
+  } ],
+  "messages" : {
+    "bogus" : {
+      "doc" : "bogus method for testing no parameters",
+      "request" : [ ],
+      "response" : "null"
+    },
+    "non_member_method" : {
+      "doc" : "method that uses non \"main_type\" as the first parameter is considered non-member",
+      "request" : [ {
+        "name" : "options",
+        "type" : "FetchOption"
+      } ],
+      "response" : {
+        "type" : "array",
+        "items" : "CityState"
+      }
+    },
+    "member_method" : {
+      "doc" : "method that uses \"main_type\" as the first parameter is considered member",
+      "request" : [ {
+        "name" : "params",
+        "type" : "CityState"
+      } ],
+      "response" : {
+        "type" : "array",
+        "items" : "CityState"
+      }
+    }
+  }
+}
