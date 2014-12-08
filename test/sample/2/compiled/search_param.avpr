@@ -1,0 +1,25 @@
+{
+  "protocol" : "SearchParam",
+  "namespace" : "Gnomon",
+  "types" : [ {
+    "type" : "record",
+    "name" : "SearchParam",
+    "fields" : [ {
+      "name" : "customer_id",
+      "type" : [ "null", "int", {
+        "type" : "array",
+        "items" : "int"
+      } ],
+      "doc" : "Required search params"
+    } ]
+  } ],
+  "messages" : {
+    "index" : {
+      "request" : [ ],
+      "response" : {
+        "type" : "array",
+        "items" : "SearchParam"
+      }
+    }
+  }
+}

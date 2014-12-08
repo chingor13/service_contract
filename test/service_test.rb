@@ -3,7 +3,7 @@ require 'test_helper'
 class ServiceTest < Minitest::Test
 
   def test_all
-    assert_equal(1, SampleService.all.length)
+    assert_equal(2, SampleService.all.length)
   end
 
   def test_find
@@ -54,6 +54,23 @@ class ServiceTest < Minitest::Test
     assert_equal(2, non_member_names.length)
     assert non_member_names.include?('non_member_method')
     assert non_member_names.include?('bogus')
+  end
+
+  def test_union_types
+    service = SampleService.find(2)
+    protocol = service.protocol('search_param')
+
+    type = protocol.type('SearchParam')
+    assert(type, 'expected to find a SearchParam type')
+
+    field = type.fields.detect{|field| field.name == 'customer_id'}
+    assert(field, 'expected to find a customer_id field')
+
+    field_type = field.type
+
+    assert_equal('union', field_type.name)
+    assert_equal('null, int, Array(int)', field_type.to_s)
+    assert_equal([NilClass, Fixnum, Array], field_type.valid_ruby_types)
   end
 
 end

@@ -1,0 +1,12 @@
+@namespace("Gnomon")
+
+protocol SearchParam {
+
+  record SearchParam {
+    /** Required search params */
+    union {null, int, array<int>} customer_id;
+  }
+
+  array<SearchParam> index();
+  
+}
