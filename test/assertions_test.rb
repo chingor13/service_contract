@@ -41,4 +41,21 @@ class AssertionsTest < Minitest::Test
     assert_endpoint_response(data, endpoint)
   end
 
+  def test_union_data_matching
+    service = SampleService.find(2)
+    assert service, "expect to find a service by version"
+
+    protocol = service.protocol("search_param")
+    endpoint = protocol.endpoint("index")
+
+    # test can be nil
+    assert_endpoint_response([{customer_id: nil}], endpoint)
+
+    # should be able to be an integer
+    assert_endpoint_response([{customer_id: 4}], endpoint)
+
+    # should be able to be an array of ints
+    assert_endpoint_response([{customer_id: [1,2,3]}], endpoint)
+  end
+
 end
