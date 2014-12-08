@@ -69,7 +69,7 @@ class ServiceTest < Minitest::Test
     field_type = field.type
 
     assert_equal('union', field_type.name)
-    assert_equal('null, int, or array<int>', field_type.to_s)
+    assert_equal('null, int, Array(int)', field_type.to_s)
     assert_equal([NilClass, Fixnum, Array], field_type.valid_ruby_types)
   end
 

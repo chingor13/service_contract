@@ -16,7 +16,9 @@ module ServiceContract
       end
 
       def to_s
-        name
+        return name unless union?
+ 
+        union_types.map(&:name).join(", ")
       end
 
       def subtype
@@ -36,6 +38,10 @@ module ServiceContract
         type_string == "record"
       end
 
+      def union?
+        type_string == "union"
+      end
+
       def valid_ruby_types
         case type_string
         when "array"
@@ -48,12 +54,20 @@ module ServiceContract
           [Float]
         when "boolean"
           [TrueClass, FalseClass]
+        when "null"
+          [NilClass]
+        when "union"
+          union_types.map(&:valid_ruby_types).flatten
         else # a complex type
           [Hash]
         end
       end
 
       protected
+
+      def union_types
+        definition.schemas.map{|schema| Type.build(schema)}
+      end
 
       def type_string
         type = definition.type
