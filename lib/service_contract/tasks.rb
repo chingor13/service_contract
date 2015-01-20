@@ -13,4 +13,17 @@ namespace :avro do
       `#{command}`
     end
   end
+
+  desc 'extract schemas'
+  task :schema do
+    jar_file = File.expand_path("../../../src/avro-tools-1.7.7.jar", __FILE__)
+    spec_dir = File.expand_path(".")
+    Dir.glob(File.join(spec_dir, "/**/*.avdl")) do |file|
+      puts file
+      folder = File.expand_path(File.join(File.dirname(file), "../schemas"))
+      command = "java -jar #{jar_file} idl2schemata #{file} #{folder}"
+      puts command
+      `#{command}`
+    end
+  end
 end
