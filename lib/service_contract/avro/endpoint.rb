@@ -25,6 +25,11 @@ module ServiceContract
       protected
 
       def request_method
+        #Check for [<METHOD>] at the front of the doc string. this signals an action override
+        if doc =~ /^\[([A-Z]+)\].+$/
+          return $1
+        end
+
         case name
         when "create"
           "POST"
