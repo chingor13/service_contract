@@ -58,4 +58,24 @@ class AssertionsTest < Minitest::Test
     assert_endpoint_response([{customer_id: [1,2,3]}], endpoint)
   end
 
+  def test_uncontracted_data_not_matching
+    service = SampleService.find(2)
+    assert service, "expect to find a service by version"
+
+    protocol = service.protocol("search_param")
+    endpoint = protocol.endpoint("index")
+
+    # test can be nil
+    failure_data = nil
+    begin
+      assert_endpoint_response([{customer_id: nil, bogus_param: 1}], endpoint)
+    rescue Minitest::Assertion => failure
+      failure_data = failure
+    end
+
+    assert !failure_data.nil?
+    assert failure_data.to_s.include?("not described in contract: bogus_param")
+
+  end
+
 end

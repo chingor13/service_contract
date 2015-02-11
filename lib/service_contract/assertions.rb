@@ -16,6 +16,10 @@ module ServiceContract
         # type should have fields
         type.fields.each do |field|
 
+          #Does data contain attributes that the contract doesn't specify?
+          data_extra_attrs = (data.keys.map(&:to_sym) - type.fields.map{|n| n.name.to_sym})
+          assert_equal 0, data_extra_attrs.size, "#{type.name} contains attributes not described in contract: #{data_extra_attrs.join(',')}"
+
           # ensure the field is present
           value = data.fetch(field.name) do
             data.fetch(field.name.to_sym) do
