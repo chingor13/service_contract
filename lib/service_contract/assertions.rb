@@ -12,7 +12,8 @@ module ServiceContract
           assert_data_matches_type(datum, type.subtype, allow_nil)
         end
       elsif type.complex?
-
+        # Skip out of the complex object is nil and allowed to be nil
+        return true if data.nil? && allow_nil
         # type should have fields
         type.fields.each do |field|
 
