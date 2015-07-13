@@ -1,3 +1,3 @@
 module ServiceContract
-  VERSION = "0.2.0.randword"
+  VERSION = "0.2.0"
 end
