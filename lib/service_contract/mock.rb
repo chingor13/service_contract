@@ -1,4 +1,4 @@
-require 'random-word'
+require 'faker'
 
 module ServiceContract
   class Mock
@@ -45,7 +45,7 @@ module ServiceContract
           when "int", :int
             Random.new.rand(10000000)
           when "string", :string
-            RandomWord.nouns.next
+            Faker::Hacker.noun
           when "float", :float
             Random.new.rand(10000.0)
           when "boolean", :boolean

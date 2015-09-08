@@ -5,5 +5,5 @@ gemspec
 
 group :test do
   gem 'codeclimate-test-reporter', require: nil
-  gem 'random-word'
+  gem 'faker'
 end
