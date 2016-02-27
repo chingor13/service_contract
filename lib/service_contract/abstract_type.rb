@@ -12,12 +12,16 @@ module ServiceContract
       []
     end
 
-    def array?
-      false
+    def valid_value?(value)
+      if valid_values.empty?
+        true
+      else
+        valid_values.include?(value)
+      end
     end
 
-    def complex?
-      false
+    def valid_values
+      []
     end
 
     def valid_ruby_types

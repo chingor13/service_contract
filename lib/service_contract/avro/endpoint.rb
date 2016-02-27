@@ -62,7 +62,7 @@ module ServiceContract
         return false if parameters.empty?
 
         first_param_type = parameters.first.type
-        first_param_type.complex? && first_param_type.name == protocol.main_type
+        first_param_type.is_a?(RecordType) && first_param_type.name == protocol.main_type
       end
     end
   end

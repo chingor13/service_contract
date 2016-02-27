@@ -9,12 +9,6 @@ module ServiceContract
         Type.build(definition.type)
       end
 
-      def subtype
-        definition.array? ?
-          definition.type.items :
-          nil
-      end
-
       def default
         definition.default
       end

@@ -33,11 +33,11 @@ module ServiceContract
       end
 
       def mock_value(field)
-        if field.array?
+        if field.subtype
           Array.new(3) do
             mock_value(field.subtype)
           end
-        elsif field.complex?
+        elsif !field.fields.empty?
           # recursively mock values
           mock_fields(field)
         else
@@ -51,7 +51,7 @@ module ServiceContract
           when "boolean", :boolean
             [true, false].sample
           end
-        end        
+        end
       end
     end
   end
