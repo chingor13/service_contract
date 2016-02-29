@@ -47,7 +47,6 @@ module ServiceContract
     end
 
     class EnumType < AbstractType
-      EnumParameter = Struct.new(:name, :type, :subtype, :default, :doc)
       def name
         "Enum(#{definition.name})"
       end
