@@ -1,0 +1,28 @@
+{
+  "protocol" : "SocialLogin",
+  "namespace" : "Gnomon",
+  "types" : [ {
+    "type" : "enum",
+    "name" : "SocialNetwork",
+    "symbols" : [ "FACEBOOK", "GOOGLE", "TWITTER", "LINKEDIN" ]
+  }, {
+    "type" : "record",
+    "name" : "Authorization",
+    "fields" : [ {
+      "name" : "token",
+      "type" : "string"
+    }, {
+      "name" : "provider",
+      "type" : "SocialNetwork"
+    } ]
+  } ],
+  "messages" : {
+    "index" : {
+      "request" : [ ],
+      "response" : {
+        "type" : "array",
+        "items" : "Authorization"
+      }
+    }
+  }
+}

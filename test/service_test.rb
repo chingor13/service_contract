@@ -68,9 +68,22 @@ class ServiceTest < Minitest::Test
 
     field_type = field.type
 
-    assert_equal('union', field_type.name)
-    assert_equal('null, int, Array(int)', field_type.to_s)
+    assert_equal('Union(null, int, Array(int))', field_type.name)
     assert_equal([NilClass, Fixnum, Array], field_type.valid_ruby_types)
+  end
+
+  def test_enum_types
+    service = SampleService.find(2)
+    protocol = service.protocol('social_login')
+    type = protocol.type('Authorization')
+
+    field = type.fields.detect{|field| field.name == 'provider'}
+    assert(field, 'expected to find a provider field')
+
+    field_type = field.type
+
+    assert_equal('Enum(SocialNetwork)', field_type.name)
+    assert_equal([String], field_type.valid_ruby_types)
   end
 
 end

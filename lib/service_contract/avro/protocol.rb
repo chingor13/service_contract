@@ -13,7 +13,7 @@ module ServiceContract
 
       def types
         avro.types.map do |type|
-          Type.new(type)
+          Type.build(type)
         end
       end
 

@@ -1,0 +1,16 @@
+@namespace("Gnomon")
+
+protocol SocialLogin {
+
+  enum SocialNetwork {
+    FACEBOOK, GOOGLE, TWITTER, LINKEDIN
+  }
+
+  record Authorization {
+    string token;
+
+    SocialNetwork provider;
+  }
+
+  array<Authorization> index();
+}

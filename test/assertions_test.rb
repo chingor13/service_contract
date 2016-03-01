@@ -78,4 +78,33 @@ class AssertionsTest < Minitest::Test
 
   end
 
+  def test_enum_values
+    service = SampleService.find(2)
+    assert service, "expect to find a service by version"
+
+    protocol = service.protocol("social_login")
+    endpoint = protocol.endpoint("index")
+
+    data = [
+      {token: "sometoken", provider: "facebook"},
+      {token: "anothertoken", provider: "linkedin"}
+    ]
+
+    assert_endpoint_response(data, endpoint)
+
+    # test can be nil
+    bad_data = [
+      {token: "sometoken", provider: "bad provider"}
+    ]
+    failure_data = nil
+    begin
+      assert_endpoint_response(bad_data, endpoint)
+    rescue Minitest::Assertion => failure
+      failure_data = failure
+    end
+
+    assert !failure_data.nil?
+    assert failure_data.to_s.include?("is not an allowed value"), failure_data
+  end
+
 end

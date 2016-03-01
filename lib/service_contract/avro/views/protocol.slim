@@ -25,12 +25,12 @@ a href=to(version.version)
               ul
                 - endpoint.parameters.each do |parameter|
                   li
-                    => parameter.type
+                    => parameter.type.name
                     = parameter.name
 
               h4 Response
               p 
-                = endpoint.response_type
+                = endpoint.response_type.name
 
   .col-md-4
     h2 Types
@@ -44,11 +44,14 @@ a href=to(version.version)
                 = type.name
           .panel-collapse.collapse.in id="collapse#{type.name}"
             .panel-body
+              - type.valid_values.each do |value|
+                p = value
               - type.fields.each do |field|
                 p
-                  a.pull-right data-toggle="collapse" href="#collapseDescription#{type.name}#{field.name}"
+                  - if field.doc
+                    a.pull-right data-toggle="collapse" href="#collapseDescription#{type.name}#{field.name}"
                     i.glyphicon.glyphicon-info-sign
-                  => field.type
+                  => field.type.name
                   | -
                   =< field.name
                 - if field.doc
