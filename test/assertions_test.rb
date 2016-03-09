@@ -122,7 +122,7 @@ class AssertionsTest < Minitest::Test
         data2: {}
       }
     ]
-    assert_bad_value(bad_data, endpoint)
+    assert_bad_value(bad_data, endpoint, message: "to be one of")
   end
 
   private
