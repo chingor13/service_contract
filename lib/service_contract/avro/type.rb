@@ -16,6 +16,34 @@ module ServiceContract
       end
     end
 
+    class MapType < AbstractType
+      def name
+        "Map(#{subtype.name})"
+      end
+
+      def subtype
+        MapValue.new(Type.build(definition.values))
+      end
+
+      def valid_ruby_types
+        [Hash]
+      end
+    end
+
+    class MapValue < AbstractType
+      def name
+        definition.name
+      end
+      def valid_type?(value)
+        value.is_a?(Array) &&
+          value.length == 2 &&
+          definition.valid_type?(value[1])
+      end
+      def valid_ruby_types
+        definition.valid_ruby_types
+      end
+    end
+
     class ArrayType < AbstractType
       def name
         "Array(#{subtype.name})"
@@ -134,6 +162,8 @@ module ServiceContract
             BooleanType.new
           when "null"
             NullType.new
+          when "map"
+            MapType.new(definition)
           else
             raise "unknown type: #{type}"
           end

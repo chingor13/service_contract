@@ -10,7 +10,7 @@ module ServiceContract
       return true if data.nil? && allow_nil
 
       # basic type checking
-      assert type.valid_ruby_types.any?{|type| data.is_a?(type) }, "expected #{type.name} to be one of #{type.valid_ruby_types}"
+      assert type.valid_type?(data), "expected `#{data}` (#{type.name}) to be one of #{type.valid_ruby_types}"
       assert type.valid_value?(data), "#{data} is not an allowed value of type: #{type.name}"
 
       # check subtype

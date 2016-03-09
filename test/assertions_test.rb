@@ -65,17 +65,10 @@ class AssertionsTest < Minitest::Test
     protocol = service.protocol("search_param")
     endpoint = protocol.endpoint("index")
 
-    # test can be nil
-    failure_data = nil
-    begin
-      assert_endpoint_response([{customer_id: nil, bogus_param: 1}], endpoint)
-    rescue Minitest::Assertion => failure
-      failure_data = failure
-    end
-
-    assert !failure_data.nil?
-    assert failure_data.to_s.include?("not described in contract: bogus_param")
-
+    bad_data = [
+      {customer_id: nil, bogus_param: 1}
+    ]
+    assert_bad_value(bad_data, endpoint, message: "not described in contract: bogus_param")
   end
 
   def test_enum_values
@@ -92,10 +85,49 @@ class AssertionsTest < Minitest::Test
 
     assert_endpoint_response(data, endpoint)
 
-    # test can be nil
     bad_data = [
       {token: "sometoken", provider: "bad provider"}
     ]
+    assert_bad_value(bad_data, endpoint)
+  end
+
+  def test_map_values
+    service = SampleService.find(2)
+    assert service, "expect to find a service by version"
+
+    protocol = service.protocol("logging")
+    endpoint = protocol.endpoint("index")
+
+    data = [
+      {
+        data: {
+          foo: 1,
+          bar: 2,
+        },
+        data2: {
+          qwer: nil,
+          asdf: 1,
+          zxcv: [2,3]
+        }
+      }
+    ]
+
+    assert_endpoint_response(data, endpoint)
+
+    bad_data = [
+      {
+        data: {
+          foo: "asdf"
+        },
+        data2: {}
+      }
+    ]
+    assert_bad_value(bad_data, endpoint, message: "to be one of")
+  end
+
+  private
+
+  def assert_bad_value(bad_data, endpoint, message: "is not an allowed value")
     failure_data = nil
     begin
       assert_endpoint_response(bad_data, endpoint)
@@ -104,7 +136,7 @@ class AssertionsTest < Minitest::Test
     end
 
     assert !failure_data.nil?
-    assert failure_data.to_s.include?("is not an allowed value"), failure_data
+    assert failure_data.to_s.include?(message), failure_data
   end
 
 end

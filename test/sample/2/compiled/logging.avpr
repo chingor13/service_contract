@@ -1,0 +1,33 @@
+{
+  "protocol" : "Logging",
+  "namespace" : "Gnomon",
+  "types" : [ {
+    "type" : "record",
+    "name" : "LogEntry",
+    "fields" : [ {
+      "name" : "data",
+      "type" : {
+        "type" : "map",
+        "values" : "int"
+      }
+    }, {
+      "name" : "data2",
+      "type" : {
+        "type" : "map",
+        "values" : [ "null", "int", {
+          "type" : "array",
+          "items" : "int"
+        } ]
+      }
+    } ]
+  } ],
+  "messages" : {
+    "index" : {
+      "request" : [ ],
+      "response" : {
+        "type" : "array",
+        "items" : "LogEntry"
+      }
+    }
+  }
+}

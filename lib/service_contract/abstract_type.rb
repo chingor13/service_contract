@@ -1,7 +1,7 @@
 module ServiceContract
   AbstractType = Struct.new(:definition) do
     def name
-      raise :not_implemented
+      raise NotImplementedError, "need to implement `name`"
     end
 
     def subtype
@@ -10,6 +10,10 @@ module ServiceContract
 
     def fields
       []
+    end
+
+    def valid_type?(value)
+      valid_ruby_types.any?{|type| value.is_a?(type) }
     end
 
     def valid_value?(value)

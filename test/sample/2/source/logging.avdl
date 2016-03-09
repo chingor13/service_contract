@@ -1,0 +1,13 @@
+@namespace("Gnomon")
+
+protocol Logging {
+
+  record LogEntry {
+    map<int> data;
+
+    map<union{null, int, array<int>}> data2;
+  }
+
+  array<LogEntry> index();
+
+}
