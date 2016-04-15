@@ -2,21 +2,21 @@ module ServiceContract
   module Assertions
 
     def assert_endpoint_response(data, endpoint, allow_nil = true)
-      assert_data_matches_type(data, endpoint.response_type, allow_nil)
+      assert_data_matches_type(data, endpoint.response_type, endpoint.name, allow_nil)
     end
 
-    def assert_data_matches_type(data, type, allow_nil = true)
+    def assert_data_matches_type(data, type, name, allow_nil = true)
       # Skip out if object is nil and allowed to be nil
       return true if data.nil? && allow_nil
 
       # basic type checking
-      assert type.valid_type?(data), "expected `#{data}` (#{type.name}) to be one of #{type.valid_ruby_types}"
+      assert type.valid_type?(data), "expected `#{data}` (#{name}) to be one of #{type.valid_ruby_types}, instead got a #{data.class.name}"
       assert type.valid_value?(data), "#{data} is not an allowed value of type: #{type.name}"
 
       # check subtype
       if type.subtype
         data.each do |datum|
-          assert_data_matches_type(datum, type.subtype, allow_nil)
+          assert_data_matches_type(datum, type.subtype, type.name, allow_nil)
         end
       end
 
@@ -34,7 +34,7 @@ module ServiceContract
         end
 
         # check the data type
-        assert_data_matches_type(value, field.type, allow_nil)
+        assert_data_matches_type(value, field.type, field.name, allow_nil)
       end
     end
 
