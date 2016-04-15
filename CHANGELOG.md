@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.5.1
+
+* update failed assertion message to give you better information on why the data didn't match the contract
+
 ## 0.5.0
 
 * add map types
