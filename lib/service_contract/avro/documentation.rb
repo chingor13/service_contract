@@ -15,7 +15,19 @@ module ServiceContract
         version = service.find(params[:version])
 
         if version
-          slim :version, locals: { version: version }
+          if request_json?
+            json version: {
+              version: version.version,
+              protocols: version.protocols.map { |protocol|
+                {
+                  name: protocol.name,
+                  link: "/#{version.version}/#{protocol.name}"
+                }
+              }
+            }
+          else
+            slim :version, locals: { version: version }
+          end
         else
           status 404
         end
