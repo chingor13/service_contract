@@ -8,7 +8,12 @@ module ServiceContract
       get '/:version/:protocol' do
         version = service.find(params[:version])
         protocol = version.protocol(params[:protocol])
-        slim :protocol, locals: { version: version, protocol: protocol }
+        if request_json?
+          content_type "application/json"
+          send_file File.join(service.data_dir, version.version, "compiled", "#{protocol.name}.avpr")
+        else
+          slim :protocol, locals: { version: version, protocol: protocol }
+        end
       end
 
       get '/:version' do

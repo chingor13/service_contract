@@ -42,4 +42,11 @@ class DocumentationJsonTest < Minitest::Test
       ]
     }}, JSON.parse(last_response.body))
   end
+
+  def test_protocol_json
+    get '/1/city_state'
+    assert_equal "application/json", last_response.headers["Content-Type"]
+    assert_equal File.read(File.expand_path("../sample/1/compiled/city_state.avpr", __FILE__)),
+      last_response.body
+  end
 end
