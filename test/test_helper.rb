@@ -8,3 +8,9 @@ class SampleService < ServiceContract::Avro::Service
     File.expand_path("../sample", __FILE__)
   end
 end
+
+class SampleDocumentation < ServiceContract::Avro::Documentation
+  def service
+    SampleService
+  end
+end

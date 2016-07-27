@@ -1,4 +1,5 @@
 require 'sinatra/base'
+require 'sinatra/json'
 require 'slim'
 
 module ServiceContract
@@ -21,12 +22,30 @@ module ServiceContract
       end
 
       get '/' do
-        slim :homepage
+        if request_json?
+          json contract: {
+            name: service.name,
+            title: service.title,
+            description: service.description,
+            versions: service.all.map { |version|
+              {
+                version: version.version,
+                link: "/#{version.version}"
+              }
+            }
+          }
+        else
+          slim :homepage
+        end
       end
 
       helpers do
         def service
           raise :not_implemented
+        end
+
+        def request_json?
+          request.accept.map(&:entry).include?("application/json")
         end
       end
     end

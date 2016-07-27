@@ -27,4 +27,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "slim"
   spec.add_development_dependency "rack-test"
   spec.add_development_dependency "capybara"
+  spec.add_development_dependency "sinatra-contrib"
+  spec.add_development_dependency "pry"
 end
