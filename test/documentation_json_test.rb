@@ -23,6 +23,7 @@ class DocumentationJsonTest < Minitest::Test
       "name" => "SampleService",
       "title" => "Avro Service",
       "description" => "",
+      "release_version" => "0.1.2",
       "versions" => [
         {"version" => "1", "link" => "/1"},
         {"version" => "2", "link" => "/2"},

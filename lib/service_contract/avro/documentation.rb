@@ -44,6 +44,7 @@ module ServiceContract
             name: service.name,
             title: service.title,
             description: service.description,
+            release_version: release_version,
             versions: service.all.map { |version|
               {
                 version: version.version,
@@ -63,6 +64,10 @@ module ServiceContract
 
         def request_json?
           request.accept.map(&:entry).include?("application/json")
+        end
+
+        def release_version
+          service.const_defined?("VERSION") ? service.const_get("VERSION") : ""
         end
       end
     end
